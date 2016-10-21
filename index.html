@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vj Shaders</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="vj.css"/>
+        <link rel="stylesheet" href="libs/codemirror/codemirror.css">
+        <link rel="stylesheet" href="libs/codemirror/theme/monokai.css">
+    </head>
+    <body>
+        <script src="vj.js"></script>
+        <script src="libs/audioHandler.js"></script>
+        <script src="libs/controlsHandler.js"></script>
+        <script src="libs/Editor.js"></script>
+        <script src="libs/three.min.js"></script>
+        <script src="libs/Detector.min.js"></script>
+        <script src="libs/Tween.min.js"></script>
+        <script src="libs/stats.min.js"></script>
+        <script src="libs/dat.gui.min.js"></script>
+
+        <script src="libs/codemirror/codemirror.js"></script>
+        <script src="libs/codemirror/mode/glsl.js"></script>
+
+        <script id="vertexShader" type="x-shader/x-vertex">
+            void main() {
+                gl_Position = vec4( position, 1.0 );
+            }
+        </script>
+
+        <script id="fragmentShader" type="x-shader/x-fragment">
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+uniform float u_time;
+uniform float u_volume;
+uniform float u_beat;
+uniform sampler2D u_waveData;
+uniform sampler2D u_levelData;
+
+void main() {
+    vec2 st = gl_FragCoord.xy/u_resolution.xy;
+    //float r = texture2D( u_waveData, vec2( st.y ) ).r;
+    gl_FragColor=vec4(st.x,st.y,0.0,1.0);
+}
+        </script>
+
+        <canvas id="c"></canvas>
+        <div id="container"></div>
+
+        <div id="loading_spinner" class="loader"></div>
+
+        <script>
+            if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+            VJ.init();
+        </script>
+    </body>
+</html>
