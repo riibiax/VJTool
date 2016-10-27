@@ -115,7 +115,7 @@ var VJ = (function() {
     function onKeyDown(event) {
         if(ControlsHandler.vizParams.fullScreen){
              switch ( event.keyCode ) {
-                case 113: /* F2 */
+                case 27: /* ESC */
                     ControlsHandler.vizParams.fullScreen= !ControlsHandler.vizParams.fullScreen;
                     vj.toggleFullScreen();
                     break;
